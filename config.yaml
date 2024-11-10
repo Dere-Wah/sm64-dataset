@@ -1,0 +1,12 @@
+game_path: "./sm64.us.f3dex2e.exe"
+game_args:
+    - "--skip-intro"
+    - "--savepath"
+    - "!"
+sm64_ex_name: "Super Mario 64 EX (OpenGL) nightly 20bb444"
+play_width: 1280
+play_height: 960
+target_width: 320
+target_height: 240
+
+
