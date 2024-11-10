@@ -34,11 +34,37 @@ capture_interval = 0.05  # Capture every 0.05 seconds
 target_width, target_height = target_width, target_height
 play_width, play_height = play_width, play_height
 
-# Define the specific keys we want to log
+def parse_key(key_str):
+    """
+    Parses a key string from the config and returns the corresponding pynput key.
+    If the key string matches an attribute in keyboard.Key, it returns keyboard.Key.<key>.
+    Otherwise, it assumes the input is a character and returns it as-is.
+    """
+    try:
+        # Check if it's a special key like 'up', 'down', etc. in keyboard.Key
+        return getattr(keyboard.Key, key_str)
+    except AttributeError:
+        # Otherwise, assume it's a standard character key
+        return key_str
+
+# Load key bindings from configuration
+keybinds = config.get("keybinds", {})
+
+# Map key bindings to valid_keys array in a specific order, parsing each key
 valid_keys = [
-    'w', 'a', 's', 'd', 'k', 'l', ',',
-    keyboard.Key.up, keyboard.Key.down, keyboard.Key.left, keyboard.Key.right
+    parse_key(keybinds.get("forward", "w")),
+    parse_key(keybinds.get("left", "a")),
+    parse_key(keybinds.get("backwards", "s")),
+    parse_key(keybinds.get("right", "d")),
+    parse_key(keybinds.get("crouch", "k")),
+    parse_key(keybinds.get("jump", "l")),
+    parse_key(keybinds.get("attack", ",")),
+    parse_key(keybinds.get("camera_up", "up")),
+    parse_key(keybinds.get("camera_down", "down")),
+    parse_key(keybinds.get("camera_left", "left")),
+    parse_key(keybinds.get("camera_right", "right"))
 ]
+
 t = 0
 file_prefix = output_dir
 file_index = 0
