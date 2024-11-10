@@ -36,11 +36,15 @@ When the game is running, a specific set of keypresses will be logged. Each keyp
 
 | forward | left | backward | right | crouch | jump | attack | camera up       | camera down       | camera left       | camera right       |
 |---------|------|----------|-------|--------|------|--------|-----------------|-------------------|-------------------|--------------------|
-| w       | a    | s        | d     | k      | l    | ,      | keyboard.Key.up | keyboard.Key.down | keyboard.Key.left | keyboard.Key.right |
+| w       | a    | s        | d     | k      | l    | ,      | up              | down              | left              | right              |
 | 0       | 1    | 2        | 3     | 4      | 5    | 6      | 7               | 8                 | 9                 | 10                 |
 
-The number under the keybind is the position of the corresponding action in the vector. When playing, you'll see the vector be printed in the terminal, so you can make sure that the keybinds are getting registered.
-Currently there is not support for changing keybinds, but it will be added soon.
+The number under the keybind is the position of the corresponding action in the vector.
+When playing, you'll see the vector be printed in the terminal, so you can make sure that the keybinds are getting registered.
+
+For special keybinds such as the arrow keys, you can use the "up", "down", "left" and "right" keywords.
+> For a list of keywords you can use check out the pynput keyboard.Key enums: https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
+Controller support is on its way!
 
 # Dataset Format
 This dataset holds a really specific format, which allows for easier use in AI training. Once you run the script, you will find a new output folder generated, with inside it a list of .hdf5 files.
