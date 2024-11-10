@@ -44,7 +44,7 @@ When playing, you'll see the vector be printed in the terminal, so you can make 
 
 For special keybinds such as the arrow keys, you can use the "up", "down", "left" and "right" keywords.
 > For a list of keywords you can use check out the pynput keyboard.Key enums: https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
-Controller support is on its way!
+Joystick support is on its way!
 
 # Dataset Format
 This dataset holds a really specific format, which allows for easier use in AI training. Once you run the script, you will find a new output folder generated, with inside it a list of .hdf5 files.
@@ -56,7 +56,8 @@ The hdf5 files contain each a list of 1000 captured frames (0 <= i <= 999), in t
 # TO BE DONE
 - [x] Create a configuration file
 - [x] Add explanation for keybinds
-- [ ] different keybinds support
+- [x] Different keybinds support
+- [ ] Joystick support
 - [x] Document the output format
 - [ ] Create a way for people to contribute to the dataset
 
