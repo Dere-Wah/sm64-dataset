@@ -8,5 +8,16 @@ play_width: 1280
 play_height: 960
 target_width: 320
 target_height: 240
-
+keybinds:
+    forward: "w"
+    left: "a"
+    backwards: "s"
+    right: "d"
+    crouch: "k"
+    jump: "l"
+    attack: ","
+    camera_up: "up"
+    camera_down: "down"
+    camera_left: "left"
+    camera_right: "right"
 
