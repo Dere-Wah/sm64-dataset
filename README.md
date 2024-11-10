@@ -18,7 +18,9 @@ Run SM64 once and take note of the name of the window it opens. It should look s
 ```
 Super Mario 64 EX (OpenGL) nightly 20bb444
 ```
-> (The nightly build version will be probably different, just update it)
+> (The nightly build version will be probably different)
+
+Open the `capture_data.py` script and update the name of the window to the one you got. Also change other variables such as your play resolution, sm64ex build name and cli arguments for running the game.
 
 Finally, run the capture_data.py script. The script will launch the game for you and will start logging keypresses & screenshots.
 
