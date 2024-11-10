@@ -20,7 +20,8 @@ Super Mario 64 EX (OpenGL) nightly 20bb444
 ```
 > (The nightly build version will be probably different)
 
-Open the `capture_data.py` script and update the name of the window to the one you got. Also change other variables such as your play resolution, sm64ex build name and cli arguments for running the game.
+Open the config.yaml and complete it accordingly to your needs. This dataset aims at collecting data at a resolution of 320x240 frames.
+By default, it will capture screenshots of the game at 1280x960 and compress them down to the target resolution. If you want to play around with these values and contribute to the dataset, make sure the aspect ratio is 4/3 and the target resolution is 320x240.
 
 Finally, run the capture_data.py script. The script will launch the game for you and will start logging keypresses & screenshots.
 
@@ -30,9 +31,28 @@ python capture_data.py
 
 To stop the game, simply press ESC.
 
+# Keybinds Logging
+When the game is running, a specific set of keypresses will be logged. Each keypress is mapped to a position in a vector, as shown below:
+
+| forward | left | backward | right | crouch | jump | attack | camera up       | camera down       | camera left       | camera right       |
+|---------|------|----------|-------|--------|------|--------|-----------------|-------------------|-------------------|--------------------|
+| w       | a    | s        | d     | k      | l    | ,      | keyboard.Key.up | keyboard.Key.down | keyboard.Key.left | keyboard.Key.right |
+| 0       | 1    | 2        | 3     | 4      | 5    | 6      | 7               | 8                 | 9                 | 10                 |
+
+The number under the keybind is the position of the corresponding action in the vector. When playing, you'll see the vector be printed in the terminal, so you can make sure that the keybinds are getting registered.
+Currently there is not support for changing keybinds, but it will be added soon.
+
+# Dataset Format
+This dataset holds a really specific format, which allows for easier use in AI training. Once you run the script, you will find a new output folder generated, with inside it a list of .hdf5 files.
+The hdf5 files contain each a list of 1000 captured frames (0 <= i <= 999), in the format:
+- `frame_<i>_x`: the image data. 3 channels (BGR no alpha) at a resolution of target_resolution (320x240)
+- `frame_<i>_y`: the key input data. Currently we log 11 actions, so it's an array of 0 and 1 of length 11.
+
+
 # TO BE DONE
-- [ ] Create a configuration file
-- [ ] Add explanation for keybinds
-- [ ] Document the output format
+- [x] Create a configuration file
+- [x] Add explanation for keybinds
+- [ ] different keybinds support
+- [x] Document the output format
 - [ ] Create a way for people to contribute to the dataset
 
