@@ -14,6 +14,7 @@ import datetime
 # Game executable path and arguments
 game_path = "sm64.us.f3dex2e.exe"
 game_args = ["--skip-intro", "--savepath", "!"]
+sm64_ex_name = "Super Mario 64 EX (OpenGL) nightly 20bb444"
 
 # Initialize some variables
 frames_data = []
@@ -117,7 +118,7 @@ def main():
 	time.sleep(3)  # Give the game some time to load
 
 	# Get the game window handle and set the size
-	hwnd = get_window_handle("Super Mario 64 EX (OpenGL) nightly 20bb444")	# Replace with the exact game window title
+	hwnd = get_window_handle(sm64_ex_name)	# Replace with the exact game window title
 	set_window_size(hwnd, play_width, play_height)
 	make_window_borderless(hwnd)
 
