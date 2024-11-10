@@ -10,22 +10,35 @@ import win32gui
 import win32con
 import h5py
 import datetime
+import yaml
 
-# Game executable path and arguments
-game_path = "sm64.us.f3dex2e.exe"
-game_args = ["--skip-intro", "--savepath", "!"]
-sm64_ex_name = "Super Mario 64 EX (OpenGL) nightly 20bb444"
+# Load configuration from YAML file
+with open("config.yaml", "r") as config_file:
+    config = yaml.safe_load(config_file)
+
+# Extract values from the configuration
+game_path = config.get("game_path", "sm64.us.f3dex2e.exe")
+game_args = config.get("game_args", ["--skip-intro", "--savepath", "!"])
+sm64_ex_name = config.get("sm64_ex_name", "Super Mario 64 EX (OpenGL) nightly 20bb444")
+play_width = config.get("play_width", 1280)
+play_height = config.get("play_height", 960)
+target_width = config.get("target_width", 320)
+target_height = config.get("target_height", 240)
 
 # Initialize some variables
 frames_data = []
 keys_pressed = []
 output_dir = datetime.datetime.now().strftime("%d-%m-%Y-%H-%M-%S")
-capture_interval = 0.05	# Capture every 0.05 seconds
-target_width, target_height = 280, 210	# Desired window size
-play_width, play_height = 1280, 960
+capture_interval = 0.05  # Capture every 0.05 seconds
+# Use the values loaded from config for target and play dimensions
+target_width, target_height = target_width, target_height
+play_width, play_height = play_width, play_height
+
 # Define the specific keys we want to log
-valid_keys = ['w', 'a', 's', 'd', 'k', 'l', ',', 
-			  keyboard.Key.up, keyboard.Key.down, keyboard.Key.left, keyboard.Key.right]
+valid_keys = [
+    'w', 'a', 's', 'd', 'k', 'l', ',',
+    keyboard.Key.up, keyboard.Key.down, keyboard.Key.left, keyboard.Key.right
+]
 t = 0
 file_prefix = output_dir
 file_index = 0
@@ -99,7 +112,7 @@ def capture_frame(window_rect, h5file):
 		# Convert from BGRA to BGR (OpenCV format)
 		img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
 		img = cv2.resize(img, (target_width, target_height))
-		cv2.imwrite(f"{output_dir}/frame_{t}.png", img)
+		#cv2.imwrite(f"{output_dir}/frame_{t}.png", img)
 		
 		h5file.create_dataset("frame_"+str(t)+"_x", data=img)
 		h5file.create_dataset("frame_"+str(t)+"_y", data=list(keys_pressed))
